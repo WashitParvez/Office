@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Office</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+ <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <% if user_signed_in? %>
+       <%= current_user.email %>
+      <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+      <% if current_user.roles.first.field =="Customer" %>
+               <%#= link_to "Create Booking", new_booking_path %>
+               <%= link_to "My Bookings", bookings_path %>
+          <%else%>
+                <%#= link_to "Create Property", new_property_path %>
+                <%= link_to "My Properties", properties_path %>
+                <%#= link_to "My Bookings on Properties", bookings_property_path %>
+                
+          <%end%>
+           <%= link_to 'Edit account' ,edit_user_registration_path %>
+  <%else %>
+     <%= link_to 'log in' ,new_user_session_path %> &nbsp;
+     <%= link_to 'sign up' ,new_user_registration_path %>
+  <%end%>
+
+    <%= yield %>
+  </body>
+</html>

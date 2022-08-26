@@ -1,0 +1,27 @@
+<h1>Show Bookings of <%=@property.name%></h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>start_date</th>
+			<th>end_date</th>
+			<th>price</th>
+	
+		</tr>
+	</thead>
+	<tbody>
+<% @booking.each do |booking|%>
+		<tr>
+
+			<td><%=booking.start_date%></td>
+			<td><%=booking.end_date%></td>
+			<td><%=booking.price%></td>
+			<td><%= link_to 'Show',booking_path(booking.id)%></td>
+			<td><%= link_to 'Edit',edit_booking_path(booking.id)%></td>
+			<td><%= link_to 'Delete',booking_path(booking.id),data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%></td>
+		</tr>
+		
+<%end%>
+
+</tbody>
+</table>
